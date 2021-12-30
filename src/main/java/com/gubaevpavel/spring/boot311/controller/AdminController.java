@@ -23,9 +23,9 @@ public class AdminController {
 
     @GetMapping("/")
     public String allUsers (@AuthenticationPrincipal User user, Model model) {
-        model.addAttribute("admin", userService.allUsers());
-        model.addAttribute("user", user);
+        model.addAttribute("users", userService.allUsers());
         model.addAttribute("roles", roleService.allRoles());
+        model.addAttribute("user", user);
         return "admin";
     }
 
@@ -40,7 +40,7 @@ public class AdminController {
     public String newUser (Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("roles", roleService.allRoles());
-        return "admin";
+        return "newUser";
     }
 
     @PostMapping()
@@ -54,7 +54,7 @@ public class AdminController {
     public String edit (Model model, @PathVariable int id) {
         model.addAttribute("user", userService.userById(id));
         model.addAttribute("roles", roleService.allRoles());
-        return "admin";
+        return "edit";
     }
 
     @PatchMapping("/{id}")
